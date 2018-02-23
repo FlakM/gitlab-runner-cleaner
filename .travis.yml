@@ -1,15 +1,18 @@
 sudo: false
 language: go
 go:
-  - 1.x
-  - master
-matrix:
-  allow_failures:
-    - go: master
-  fast_finish: true
+- 1.x
 install:
-  - # Do nothing. This is needed to prevent default install action "go get -t -v ./..." from happening here (we want it to happen inside script step).
+- # do nothing
 script:
-  - go get -t -v ./...
-  - go tool vet .
-  - go test -v -race ./...
+- go get -t -v ./...
+- go tool vet .
+- go test -v -race ./...
+- go build -o gitlab-runner-cleaner.sh main.go
+deploy:
+  provider: releases
+  api_key:
+    secure: FA+SQB/wrWdY9uP/wkQz9VBhtAHFRAWF+KcpzO5f6utkxz1rhT5CcDUzwKG8u9RZ5gHbZDGrAphiaI1UrbgPwVe6WKSfOY093ijlmPB6Y6yFk/2CGhYsknhpgjrxPZIr9cUMOeL0SCshewHUpfPPHXzARWsbwgeqiL/gZ+IHPvqpB9yzrtqzMDmTT4yXe92RKMCe1HOnJqYdp0ynKjsNR1/V4ulc3EFPKSuTcvyWD5uYJRokQMK3vriemNbwWx1Y4gMyeMOiTHPGOkKTHVorA1Yfagh0/fPF6v+qJ37Pd1pv1x4sg2Nfk0pbw+qwETHEhM9KlI6hhsNUvp8cNML6bmjTPsL916z7jatzEseJk41DLIoGzKj5C6w1dGZn72e4qj006vSbuGTcxAAwmWTFtM98vb1beE2oEHxC3CxQ2/h5VjwmXXhEh0YZ11D3gtYpb5VlZUODUEtYfuaaiqgDEO0nrnnSiefT8Ib/UdkfHatbf/I5gpvuiPxoiYBq69dIu5yGB8I1IzjTbDxBHDxpSnLM9y5Nj8zWVLk84Pb/Lz2B0gOQq1aRByjyPbN/sfOG5m0uQLP1aFEEGMhxwlrLKGyvy9AZdPb0TicZrW7Icd244Tn9CsRwCrYQOSfODSrlzUbSQar+fUXozsakJ1eR3izyGDyLBAukUyENBli1lfU=
+  file: "./gitlab-runner-cleaner.sh"
+  on:
+    repo: FlakM/gitlab-runner-cleaner

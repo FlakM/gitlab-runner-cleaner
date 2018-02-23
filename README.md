@@ -11,7 +11,15 @@ To clean up from time to time you have to unregister runners from all projects a
 # Usage
 
 
+Basic usage: 
 
 ```bash
-go run main.go 
+# https://github.com/FlakM/gitlab-runner-cleaner/releases go here to check latest releases:
+VER=0.0.1
+GITLAB_TOKEN=<my secret token here>
+curl -LJO https://github.com/FlakM/gitlab-runner-cleaner/releases/download/$VER/gitlab-runner-cleaner.sh
+chmod +x gitlab-runner-cleaner.sh
+./gitlab-runner-cleaner.sh -h # this requires GITLAB_TOKEN enviroment variable
 ```
+
+

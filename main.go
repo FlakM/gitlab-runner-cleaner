@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/FlakM/gitlab-runner-cleaner/cleaner"
+	. "github.com/FlakM/gitlab-runner-cleaner/cleaner"
 	"github.com/urfave/cli"
 )
 
@@ -19,9 +19,9 @@ func init() {
 	App.Usage = `Check -h`
 	App.Author = "Maciej Flak"
 
-	App.Version = ""
+	App.HideVersion = true
 
-	cleaner.InitializeConfig()
+	InitializeConfig()
 }
 
 func main() {
@@ -32,8 +32,9 @@ func main() {
 }
 
 func AddCommands() {
-	AddCommand(cleaner.CleanCommand())
-	AddCommand(cleaner.RegisterCommand())
+	AddCommand(CleanCommand())
+	AddCommand(RegisterCommand())
+	AddCommand(VersionCommand())
 }
 
 // AddCommand adds a child command.

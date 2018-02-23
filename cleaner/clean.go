@@ -13,6 +13,7 @@ func CleanCommand() cli.Command {
 		Name:  "clean",
 		Usage: "cleans offline runners for all available projects",
 		Action: func(ctx *cli.Context) (err error) {
+			log.Println("Starting")
 			git := gitlab.NewClient(nil, Config.GitlabToken)
 
 			projects, err := ListAllProjects(git)
